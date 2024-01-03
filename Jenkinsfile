@@ -14,7 +14,7 @@ pipeline {
         CENTRAL_REPO="vpro-maven-central"
        // NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.31.46.175"
+        NEXUS_URL = "13.127.206.214"
         NEXUS_PORT="8081"
       //  NEXUS_REPOSITORY = "vprofile-release"
         NEXUS_GRP_REPO = "vprofile-group"
@@ -23,12 +23,38 @@ pipeline {
     }
 
     stages {
-        stage('BUILD') {
+        stage('BUILD'){
             steps {
-               
-                
-                        sh 'mvn clean install -DskipTests'
-                               
+                sh 'mvn clean install -DskipTests'
+            }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+
+	stage('UNIT TEST'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+	stage('INTEGRATION TEST'){
+            steps {
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
+		
+        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+            post {
+                success {
+                    echo 'Generated Analysis Result'
+                }
             }
         }
     }
