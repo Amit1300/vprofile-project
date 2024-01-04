@@ -89,7 +89,7 @@ pipeline {
         nexusVersion: 'nexus3',
         protocol: 'http',
         nexusUrl: "${NEXUS_URL}:${NEXUS_PORT}",
-        groupId: 'QA',
+        groupId: 'com.visualpathit',
         version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP.replaceAll(' ', '%20')}",
         repository: "{RELEASE_REPO}",
         credentialsId: 'nexus',
