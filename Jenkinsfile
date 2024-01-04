@@ -94,7 +94,7 @@ pipeline {
         repository: "{RELEASE_REPO}",
         credentialsId: 'nexus',
         artifacts: [
-            [artifactId: amit,
+            [artifactId: 'vprofile',
              classifier: '',
              file:'target/vprofile-v2.war',
              type: 'war']
