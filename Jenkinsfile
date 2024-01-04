@@ -90,7 +90,7 @@ pipeline {
         protocol: 'http',
         nexusUrl: "${NEXUS_URL}:${NEXUS_PORT}",
         groupId: 'QA',
-        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP.replaceAll(' ', '%20')}",
         repository: "{RELEASE_REPO}",
         credentialsId: 'nexus',
         artifacts: [
