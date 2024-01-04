@@ -90,7 +90,7 @@ pipeline {
         protocol: 'http',
         nexusUrl: "${NEXUS_URL}:${NEXUS_PORT}",
         groupId: 'com.visualpathit',
-        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP.replaceAll(' ', '%20')}",
+        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
         repository: "{RELEASE_REPO}",
         credentialsId: 'nexus',
         artifacts: [
