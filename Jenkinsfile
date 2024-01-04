@@ -83,7 +83,25 @@ pipeline {
             
           }
         }
-
+         stage("nexus artifact upload"){
+            steps{
+                    nexusArtifactUploader(
+        nexusVersion: 'nexus3',
+        protocol: 'http',
+        nexusUrl: "${NEXUS_URL}:${NEXUS_PORT}",
+        groupId: 'QA',
+        version: version,
+        repository: "{RELEASE_REPO}",
+        credentialsId: 'nexus',
+        artifacts: [
+            [artifactId: amit,
+             classifier: '',
+             file:'target/vprofile-v2.war'
+             type: 'war']
+        ]
+     )
+            }
+         }
 
     }
 }
