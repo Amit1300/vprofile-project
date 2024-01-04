@@ -83,25 +83,7 @@ pipeline {
             
           }
         }
-         stage("nexus artifact upload"){
-            steps{
-                    nexusArtifactUploader(
-        nexusVersion: 'nexus3',
-        protocol: 'http',
-        nexusUrl: "${NEXUS_URL}:${NEXUS_PORT}",
-        groupId: 'com.visualpathit',
-        version: "${ARTVERSION}",
-        repository: "{RELEASE_REPO}",
-        credentialsId: 'nexus',
-        artifacts: [
-            [artifactId: 'vprofile',
-             classifier: '',
-             file:'target/vprofile-v2.war',
-             type: 'war']
-        ]
-     )
-            }
-         }
+    
 
     }
 }
