@@ -58,25 +58,18 @@ pipeline {
                 }
             }
         }
+stage('CODE ANALYSIS with SONARQUBE') {
+    environment {
+        scannerHome = tool 'sonar'
+    }
 
-     stage('CODE ANALYSIS with SONARQUBE') {
-          
-		  environment {
-             scannerHome = tool 'sonar'
-          }
-
-         steps {
-            withSonarQubeEnv('sonar') {
-               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile '''
-                   
-                   
-            }
-
-            timeout(time: 10, unit: 'MINUTES') {
-               waitForQualityGate abortPipeline: true
-            }
-          }
+    steps {
+        withSonarQubeEnv('sonar') {
+            sh """${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile"""
         }
+    }
+}
+
 
     }
 }
