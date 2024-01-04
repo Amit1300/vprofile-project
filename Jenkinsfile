@@ -96,7 +96,7 @@ pipeline {
         artifacts: [
             [artifactId: amit,
              classifier: '',
-             file:'target/vprofile-v2.war'
+             file:'target/vprofile-v2.war',
              type: 'war']
         ]
      )
